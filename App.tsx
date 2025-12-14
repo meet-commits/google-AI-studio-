@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import AboutSection from './components/AboutSection';
 import DesignerSection from './components/DesignerSection';
 import DeveloperSection from './components/DeveloperSection';
 import DemoSection from './components/DemoSection';
@@ -17,6 +18,7 @@ const App: React.FC = () => {
       <div className="relative z-10 flex flex-col flex-grow">
         <main className="flex-grow">
           <Hero />
+          <AboutSection />
           <DesignerSection />
           <DeveloperSection />
           <DemoSection />
