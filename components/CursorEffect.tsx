@@ -49,11 +49,22 @@ const CursorEffect: React.FC = () => {
           transform: 'translate(-50%, -50%)'
         }}
       >
-        <div className={`
-          relative flex items-center justify-center rounded-full border border-[#00F3FF] transition-all duration-150 ease-out
-          ${isPointer ? 'w-12 h-12 bg-[#00F3FF]/10' : 'w-6 h-6 bg-transparent'}
-        `}>
-          <div className="w-1 h-1 bg-[#00F3FF] rounded-full shadow-[0_0_10px_#00F3FF]"></div>
+        <div 
+          className="relative flex items-center justify-center rounded-full transition-all duration-150 ease-out"
+          style={{
+            width: isPointer ? '48px' : '24px',
+            height: isPointer ? '48px' : '24px',
+            border: '1px solid #00F3FF',
+            backgroundColor: isPointer ? 'rgba(0, 243, 255, 0.1)' : 'transparent'
+          }}
+        >
+          <div style={{
+            width: '4px',
+            height: '4px',
+            backgroundColor: '#00F3FF',
+            borderRadius: '50%',
+            boxShadow: '0 0 10px #00F3FF'
+          }}></div>
         </div>
       </div>
 
@@ -66,7 +77,14 @@ const CursorEffect: React.FC = () => {
           transform: `translate(-50%, -50%)`,
         }}
       >
-         <div className="w-32 h-32 bg-[#BC13FE] rounded-full blur-3xl opacity-10"></div>
+         <div style={{
+           width: '128px',
+           height: '128px',
+           backgroundColor: '#BC13FE',
+           borderRadius: '50%',
+           filter: 'blur(48px)',
+           opacity: '0.1'
+         }}></div>
       </div>
     </>
   );

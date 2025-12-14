@@ -22,20 +22,33 @@ const Navbar: React.FC = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-[#030014]/80 backdrop-blur-lg border-b border-[#00F3FF]/20 py-4' 
-          : 'bg-transparent py-6'
-      }`}
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100%',
+        zIndex: 50,
+        backgroundColor: isScrolled ? 'rgba(3, 0, 20, 0.8)' : 'transparent',
+        backdropFilter: isScrolled ? 'blur(12px)' : 'none',
+        borderBottom: isScrolled ? '1px solid rgba(0, 243, 255, 0.2)' : 'none',
+        padding: isScrolled ? '16px' : '24px',
+        transition: 'all 0.3s ease'
+      }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center relative z-50">
           <div className="flex items-center space-x-2 group cursor-pointer">
-            <div className="p-2 border border-[#00F3FF] rounded bg-[#00F3FF]/10 group-hover:bg-[#00F3FF]/20 transition-all shadow-[0_0_10px_rgba(0,243,255,0.2)]">
-              <Sparkles className="h-6 w-6 text-[#00F3FF]" />
+            <div style={{
+              padding: '8px',
+              border: '1px solid #00F3FF',
+              borderRadius: '4px',
+              backgroundColor: 'rgba(0, 243, 255, 0.1)',
+              transition: 'all 0.3s ease'
+            }}>
+              <Sparkles className="h-6 w-6" style={{color: '#00F3FF'}} />
             </div>
-            <span className="text-2xl font-bold tracking-tight font-display text-white">
-              GOOGLE <span className="text-[#00F3FF]">AI STUDIO</span>
+            <span className="text-2xl font-bold tracking-tight text-white" style={{fontFamily: 'Orbitron, sans-serif'}}>
+              GOOGLE <span style={{color: '#00F3FF'}}>AI STUDIO</span>
             </span>
           </div>
 
@@ -45,7 +58,23 @@ const Navbar: React.FC = () => {
               <a
                 key={link.name}
                 href={link.href}
-                className="text-gray-400 hover:text-[#00F3FF] font-medium tracking-widest text-sm transition-all duration-200 hover:shadow-[0_0_20px_rgba(0,243,255,0.4)] hover:scale-105"
+                style={{
+                  color: '#9CA3AF',
+                  fontSize: '14px',
+                  fontWeight: '500',
+                  letterSpacing: '0.05em',
+                  transition: 'all 0.2s ease'
+                }}
+                onMouseEnter={(e) => {
+                  const target = e.target as HTMLElement;
+                  target.style.color = '#00F3FF';
+                  target.style.textShadow = '0 0 20px rgba(0, 243, 255, 0.4)';
+                }}
+                onMouseLeave={(e) => {
+                  const target = e.target as HTMLElement;
+                  target.style.color = '#9CA3AF';
+                  target.style.textShadow = 'none';
+                }}
               >
                 {link.name}
               </a>
@@ -56,7 +85,13 @@ const Navbar: React.FC = () => {
           <div className="md:hidden">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-[#00F3FF] hover:text-white focus:outline-none p-2"
+              style={{
+                color: '#00F3FF',
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                padding: '8px'
+              }}
             >
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -66,13 +101,45 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Nav */}
       {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full bg-[#0a0a0a] border-b border-[#00F3FF]/20 backdrop-blur-xl z-40 shadow-2xl">
-          <div className="px-4 pt-4 pb-6 space-y-2">
+        <div style={{
+          position: 'absolute',
+          top: '100%',
+          left: 0,
+          width: '100%',
+          backgroundColor: '#0a0a0a',
+          borderBottom: '1px solid rgba(0, 243, 255, 0.2)',
+          backdropFilter: 'blur(16px)',
+          zIndex: 40,
+          boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)'
+        }}>
+          <div style={{padding: '16px', display: 'flex', flexDirection: 'column', gap: '8px'}}>
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className="block px-4 py-3 rounded-md text-base font-medium text-gray-300 hover:text-[#00F3FF] hover:bg-white/5 font-display border border-transparent hover:border-[#00F3FF]/30 transition-all"
+                style={{
+                  display: 'block',
+                  padding: '12px 16px',
+                  borderRadius: '6px',
+                  fontSize: '16px',
+                  fontWeight: '500',
+                  color: '#D1D5DB',
+                  border: '1px solid transparent',
+                  transition: 'all 0.3s ease',
+                  fontFamily: 'Orbitron, sans-serif'
+                }}
+                onMouseEnter={(e) => {
+                  const target = e.target as HTMLElement;
+                  target.style.color = '#00F3FF';
+                  target.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
+                  target.style.borderColor = 'rgba(0, 243, 255, 0.3)';
+                }}
+                onMouseLeave={(e) => {
+                  const target = e.target as HTMLElement;
+                  target.style.color = '#D1D5DB';
+                  target.style.backgroundColor = 'transparent';
+                  target.style.borderColor = 'transparent';
+                }}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {link.name}
